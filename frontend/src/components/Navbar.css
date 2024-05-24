@@ -1,0 +1,22 @@
+/* Rectangle 8 */
+.outpost-navbar {
+	/* position: fixed; */
+	width: 80px;
+	height: 100vh;
+	padding: 0;
+	/* left: 0; */
+
+	background: #101114;
+	/* border: white solid 1px; */
+}
+
+/* .fixed {
+	width: 80px;
+	height: 100vh;
+	background: #101114;
+	border: white solid 1px;
+	-ms-flex: 0 0 80px;
+	flex: 0 0 80px;
+	display: flex;
+	justify-content: center;
+} */
