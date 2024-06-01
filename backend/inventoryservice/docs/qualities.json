@@ -1,0 +1,18 @@
+{
+	"Normal": 0,
+	"rarity1": 1,
+	"rarity2": 2,
+	"vintage": 3,
+	"rarity3": 4,
+	"rarity4": 5,
+	"Unique": 6,
+	"community": 7,
+	"developer": 8,
+	"selfmade": 9,
+	"customized": 10,
+	"strange": 11,
+	"completed": 12,
+	"haunted": 13,
+	"collectors": 14,
+	"paintkitweapon": 15
+}

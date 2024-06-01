@@ -1,0 +1,94 @@
+{
+	"result": {
+		"status": 1,
+		"num_backpack_slots": 1400,
+		"items": [
+			{
+				"id": 14466771967,
+				"original_id": 12321822343,
+				"defindex": 30413,
+				"level": 95,
+				"quality": 5,
+				"inventory": 2147483650,
+				"quantity": 1,
+				"origin": 6,
+				"equipped": [
+					{
+						"class": 7,
+						"slot": 10
+					},
+					{
+						"class": 6,
+						"slot": 7
+					},
+					{
+						"class": 8,
+						"slot": 10
+					},
+					{
+						"class": 9,
+						"slot": 7
+					},
+					{
+						"class": 5,
+						"slot": 8
+					},
+					{
+						"class": 4,
+						"slot": 10
+					},
+					{
+						"class": 1,
+						"slot": 8
+					},
+					{
+						"class": 3,
+						"slot": 7
+					}
+				],
+				"attributes": [
+					{
+						"defindex": 134,
+						"value": 1095761920,
+						"float_value": 13
+					},
+					{
+						"defindex": 142,
+						"value": 1265034982,
+						"float_value": 15132390
+					},
+					{
+						"defindex": 261,
+						"value": 1265034982,
+						"float_value": 15132390
+					},
+					{
+						"defindex": 519,
+						"value": 3224790630,
+						"float_value": -2.84999990463256836
+					},
+					{
+						"defindex": 520,
+						"value": 1065353216,
+						"float_value": 1
+					},
+					{
+						"defindex": 746,
+						"value": 1065353216,
+						"float_value": 1
+					},
+					{
+						"defindex": 292,
+						"value": 1115684864,
+						"float_value": 64
+					},
+					{
+						"defindex": 388,
+						"value": 1115684864,
+						"float_value": 64
+					}
+				]
+			}
+		]
+	}
+}
