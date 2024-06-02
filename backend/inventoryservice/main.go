@@ -17,6 +17,6 @@ func main() {
 		os.Exit(1)
 	}
 
-	gRPCServer := NewGRPCServer(":3002")
+	gRPCServer := NewGRPCServer(":3003")
 	gRPCServer.Run()
 }

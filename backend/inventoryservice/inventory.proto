@@ -17,8 +17,8 @@ message Item {
     uint32 level = 4;
     uint32 quality = 5;
     uint32 quantity = 6;
-    string custom_name = 7;
-    string custom_description = 8;
+    optional string custom_name = 7;
+    optional string custom_description = 8;
     bool is_tradable = 9;
     bool is_craftable = 10;
     repeated Attribute attributes = 11;

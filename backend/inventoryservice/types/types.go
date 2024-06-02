@@ -27,8 +27,8 @@ type Item struct {
 	Inventory         int          `json:"inventory"` // not really important
 	Quantity          int          `json:"quantity"`
 	Origin            int          `json:"origin"`
-	CustomName        string       `json:"custom_name"`
-	CustomDescription string       `json:"custom_desc"`
+	CustomName        *string      `json:"custom_name,omitempty"`
+	CustomDescription *string      `json:"custom_desc,omitempty"`
 	FlagCannotTrade   bool         `json:"flag_cannot_trade"`
 	FlagCannotCraft   bool         `json:"flag_cannot_craft"`
 	Attributes        []*Attribute `json:"attributes"`

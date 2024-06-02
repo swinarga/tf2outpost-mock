@@ -156,3 +156,8 @@ Example Burning Flames Merc's Mohawk:
 -   Attribute Defindex: 519 & 520 -> particle effect vertical offset and particle effect use head origin. The slider to adjust the unusual effect position.
 -   Attribute Defindex: 746 -> cosmetic_allow_inspect
 -   Attribute Defindex: 292 -> kill_eater_score_type. No idea what this is
+
+---
+
+-   uint64 maps to string when converted to JSON: https://groups.google.com/g/protobuf/c/4-BY-k-Lk-g
+-   Optional fields of a message in RPC calls still have default values even when value is not set. However, these values are omitted when turned into JSON.

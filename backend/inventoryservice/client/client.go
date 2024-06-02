@@ -46,7 +46,7 @@ func MockGetInventoryResponse() ([]byte, error) {
 }
 
 func (c *SteamAPIClient) GetInventory(id uint64) (*types.Result, error) {
-	// // Query params
+	// MAKE REQUEST
 	params := url.Values{}
 	params.Add("steamId", strconv.FormatUint(id, 10))
 	params.Add("key", c.SteamKey)
@@ -66,6 +66,7 @@ func (c *SteamAPIClient) GetInventory(id uint64) (*types.Result, error) {
 	}
 	// Close the response body
 	defer res.Body.Close()
+	// byteValue, _ := MockGetInventoryResponse()
 
 	var response *types.Response
 	if err := json.Unmarshal(byteValue, &response); err != nil {
