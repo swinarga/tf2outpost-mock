@@ -65,8 +65,8 @@ func (s *InventoryService) GetInventory(ctx context.Context, id uint64) (*types.
 			Quantity:          uint32(item.Quantity),
 			CustomName:        item.CustomName,
 			CustomDescription: item.CustomDescription,
-			IsTradable:        item.FlagCannotTrade,
-			IsCraftable:       item.FlagCannotCraft,
+			IsTradable:        !item.FlagCannotTrade,
+			IsCraftable:       !item.FlagCannotCraft,
 		}
 
 		if len(item.Attributes) > 0 {
