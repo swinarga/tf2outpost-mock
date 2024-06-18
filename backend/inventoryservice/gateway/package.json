@@ -1,0 +1,31 @@
+{
+	"name": "gateway",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"type": "module",
+	"scripts": {
+		"dev": "nodemon index.js"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"dependencies": {
+		"@grpc/grpc-js": "^1.10.8",
+		"@grpc/proto-loader": "^0.7.13",
+		"@tf2autobot/tf2-schema": "^4.4.4",
+		"@tf2autobot/tf2-sku": "^2.0.4",
+		"body-parser": "^1.20.2",
+		"dotenv": "^16.4.5",
+		"express": "^4.19.2",
+		"express-openapi-validator": "^5.2.0",
+		"firebase-admin": "^12.1.1",
+		"js-yaml": "^4.1.0",
+		"minimist": "^1.2.8",
+		"swagger-ui-express": "^5.0.1",
+		"tf2-item-format": "^5.9.12"
+	},
+	"devDependencies": {
+		"nodemon": "^3.1.2"
+	}
+}
