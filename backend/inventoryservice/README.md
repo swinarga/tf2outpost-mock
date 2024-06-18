@@ -1,3 +1,5 @@
+# GetPlayerItems
+
 Example item from http://api.steampowered.com/IEconItems_440/GetPlayerItems/v0001/
 
 ```json
@@ -161,3 +163,22 @@ Example Burning Flames Merc's Mohawk:
 
 -   uint64 maps to string when converted to JSON: https://groups.google.com/g/protobuf/c/4-BY-k-Lk-g
 -   Optional fields of a message in RPC calls still have default values even when value is not set. However, these values are omitted when turned into JSON.
+-   The fields that we can expect when fetching TF2 Inventory: [TF2Autobot](https://github.com/TF2Autobot/tf2autobot/blob/838aa8ae20ca82af11b7f7d43b530aa66617ee12/src/classes/TF2Inventory.ts)
+
+# Steamcommunity.com/inventory
+
+See example [here](./client/example_Steamcommunity/hohinso.json)
+https://stackoverflow.com/questions/17393099/getting-someones-steam-inventory
+
+```
+http://steamcommunity.com/inventory/<PROFILEID>/440/2?l=english&count=5000
+```
+
+l is the language you want to receive data back in and count is the number of items to receive back at a time. The maximum is 5000.
+
+```
+http://steamcommunity.com/inventory/<PROFILEID>/440/2?l=english&count=5000&start_assetid=468336866
+
+```
+
+This will pull the next 5000 items starting with assetid 468336866.
