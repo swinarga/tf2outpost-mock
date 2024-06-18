@@ -6,6 +6,8 @@ import (
 	inventory "github.com/swinarga/tf2outpost-mock/inventoryservice/genproto"
 	"github.com/swinarga/tf2outpost-mock/inventoryservice/types"
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/codes"
+	"google.golang.org/grpc/status"
 )
 
 // implements the InventoryServiceServer interface
@@ -18,7 +20,14 @@ type InventoryGrpcHandler struct {
 func (h *InventoryGrpcHandler) GetInventory(ctx context.Context, req *inventory.GetInventoryRequest) (*inventory.GetInventoryResponse, error) {
 	inv, err := h.inventoryService.GetInventory(ctx, req.GetId())
 	if err != nil {
+		err := status.Newf(
+			codes.Internal,
+			"error getting inventory id: %d",
+			req.GetId(),
+		)
+
 		// res should be error message
+		return nil, err.Err()
 	}
 
 	// fmt.Printf("Inventory items: %v\n", inv.Items)

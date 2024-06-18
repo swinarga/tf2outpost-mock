@@ -2,6 +2,7 @@ package client
 
 import (
 	"encoding/json"
+	"errors"
 	"fmt"
 	"io"
 	"log"
@@ -72,6 +73,12 @@ func (c *SteamAPIClient) GetInventory(id uint64) (*types.Result, error) {
 	if err := json.Unmarshal(byteValue, &response); err != nil {
 		fmt.Println(err)
 		return &types.Result{}, err
+	}
+
+	if response.Result.Status != 1 {
+		fmt.Printf("Error, status: %d\n", response.Result.Status)
+		return &response.Result, errors.New("Error, status: " + strconv.Itoa(response.Result.Status))
+
 	}
 
 	// fmt.Printf("Response status: %d\n", response.Result.Status)
