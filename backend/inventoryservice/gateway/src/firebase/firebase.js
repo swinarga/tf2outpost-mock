@@ -14,6 +14,11 @@ async function addDoc(collection, value) {
 	return res;
 }
 
+async function addDocWithKey(collection, key, value) {
+	const res = await firestore.collection(collection).doc(key).set(value);
+	return res;
+}
+
 async function getDocByKey(collection, key) {
 	const docRef = firestore.collection(collection).doc(key);
 	const doc = await docRef.get();
@@ -53,4 +58,4 @@ async function getDoc(collection, filter = undefined) {
 	return d;
 }
 
-export { firestore, addDoc, getDoc, getDocByKey };
+export { firestore, addDoc, addDocWithKey, getDoc, getDocByKey };

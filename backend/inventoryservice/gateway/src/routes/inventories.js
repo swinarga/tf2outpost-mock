@@ -1,5 +1,10 @@
 import express from "express";
-import { addDoc, getDoc, getDocByKey } from "../firebase/firebase.js";
+import {
+	addDoc,
+	addDocWithKey,
+	getDoc,
+	getDocByKey,
+} from "../firebase/firebase.js";
 import {
 	ensureAuthenticated,
 	ensureInternalService,
@@ -20,7 +25,6 @@ function fetchInventory(id) {
 					formatItem(item)
 				);
 				const formattedInventory = {
-					steamId: inventory.steam_id,
 					items: formattedItems,
 					numBackpackSlots: inventory.num_backpack_slots,
 				};
@@ -28,12 +32,12 @@ function fetchInventory(id) {
 				// console.log(formattedItems);
 
 				// TODO: store to DB
-				const createdInventory = await addDoc(
+				const createdInventory = await addDocWithKey(
 					"inventories",
+					inventory.steam_id,
 					formattedInventory
 				);
 
-				console.log(`Inventory created: ${createdInventory}`);
 				resolve(formattedInventory);
 			}
 		});
@@ -47,9 +51,9 @@ router.get("/:id", async (req, res) => {
 
 	// TODO: check last queried time or use redis to determine
 	// if we should re-fetch inventory from steam API
-	const inventories = await getDoc("inventories", ["steamId", "==", id]);
+	const inventory = await getDocByKey("inventories", id);
 
-	if (inventories.length === 0) {
+	if (!inventory) {
 		console.log("inventory not found in DB, fetching from steam API");
 		// inventory not found in DB, fetch from go service
 		try {
@@ -60,7 +64,7 @@ router.get("/:id", async (req, res) => {
 		}
 	}
 
-	return res.send(inventories[0].value);
+	return res.send(inventory);
 });
 
 export default router;
