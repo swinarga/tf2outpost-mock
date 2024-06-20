@@ -2,7 +2,8 @@ export const attributeDefindex = {
 	paint: [142, 261],
 	killstreak: 2025, // Killstreak tier (1 KS, 2 Spec KS, 3 Prof KS)
 	australium: 2027,
-	effect: 134,
+	effect: 134, // see float value
+	taunt_effect: 2041, // see value
 	festivized: 2053,
 	parts: [379, 380, 381, 382, 383, 384], // 379, 381, 383 are strange part counters -> see value
 	// 380, 382, 384 are strange part types -> see float_value

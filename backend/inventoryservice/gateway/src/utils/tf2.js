@@ -9,6 +9,7 @@ import {
 	sheens,
 	killstreakers,
 } from "./data.js";
+import getBaseItemImage from "../lib/autobot.tf/getBaseItemImage.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const SCHEMA_PATH = path.join(__dirname, "..", "..", "schema_cached.json");
@@ -39,17 +40,15 @@ export function formatItem(item) {
 		switch (itemAttribute.defindex) {
 			case attributeDefindex.killstreak:
 				itemObjectForSku.killstreak = itemAttribute.float_value;
-				if (itemAttribute.float_value == 2) {
-					formattedItem.sheen = sheens[itemAttribute.float_value];
-					break;
-				}
+				break;
 
-				if (itemAttribute.float_value == 3) {
-					formattedItem.sheen = sheens[itemAttribute.float_value];
-					formattedItem.killstreaker =
-						killstreakers[itemAttribute.float_value];
-					break;
-				}
+			case attributeDefindex.killstreaker:
+				formattedItem.killstreaker =
+					killstreakers[itemAttribute.float_value];
+				break;
+
+			case attributeDefindex.sheen:
+				formattedItem.sheen = sheens[itemAttribute.float_value];
 				break;
 
 			case attributeDefindex.australium:
@@ -59,6 +58,12 @@ export function formatItem(item) {
 
 			case attributeDefindex.effect:
 				itemObjectForSku.effect = itemAttribute.float_value;
+				break;
+
+			case attributeDefindex.taunt_effect:
+				if (itemAttribute.is_int) {
+					itemObjectForSku.effect = itemAttribute.value_int;
+				}
 				break;
 
 			case attributeDefindex.festivized:
@@ -92,6 +97,20 @@ export function formatItem(item) {
 	}
 	if (item.custom_description) {
 		formattedItem.custom_description = item.custom_description;
+	}
+
+	const [itemImageUrlPrint, needResize] = getBaseItemImage(
+		schemaManager.schema.getItemBySKU(sku),
+		itemObjectForSku,
+		formattedItem.name
+	);
+	formattedItem.image_url = itemImageUrlPrint;
+
+	// if item has effect, get image from autobot.tf
+	// otherwise, use base image from schema
+	if (itemObjectForSku.effect) {
+		formattedItem.image_url =
+			"https://autobot.tf/images/items/" + sku + ".png";
 	}
 
 	return formattedItem;
