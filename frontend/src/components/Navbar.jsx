@@ -3,8 +3,11 @@ import inventoryIcon from "/backpack.svg";
 import tradeIcon from "/ph_swap.svg";
 import offerIcon from "/ph_chat.svg";
 import searchIcon from "/ph_magnifying-glass.svg";
+import { Link } from "react-router-dom";
+import { AuthData } from "../auth/AuthWrapper";
 
 export default function Navbar(props) {
+	const { user } = AuthData();
 	return (
 		<div className="d-flex flex-column outpost-navbar align-items-center">
 			<div className="outpost-icon-container">
@@ -13,9 +16,12 @@ export default function Navbar(props) {
 				</a>
 			</div>
 			<div className="outpost-icon-container">
-				<a href="">
+				<Link to="/listings/new">
 					<img className="outpost-icon" src={tradeIcon} alt="" />
-				</a>
+				</Link>
+				{/* <a href="">
+					<img className="outpost-icon" src={tradeIcon} alt="" />
+				</a> */}
 			</div>
 			<div className="outpost-icon-container">
 				<a href="">
