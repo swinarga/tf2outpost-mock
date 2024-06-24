@@ -1,0 +1,14 @@
+.item {
+	display: block;
+	float: left;
+	position: relative;
+	width: 82px;
+	height: 70px;
+	background: #202227;
+	background-size: 82px;
+	background-position: center;
+	border: 1px solid #202227;
+	margin: 0 4px 4px 0;
+	overflow: hidden;
+	border-radius: 4px;
+}
