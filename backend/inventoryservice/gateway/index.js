@@ -9,6 +9,7 @@ import swaggerUI from "swagger-ui-express";
 import jsYaml from "js-yaml";
 import fs from "fs";
 import bodyParser from "body-parser";
+import cors from "cors";
 
 dotenv.config();
 
@@ -18,6 +19,13 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const app = express();
 
 app.use(bodyParser.json());
+
+const corsOptions = {
+	origin: process.env.CLIENT_URL,
+	methods: "GET,POST,PUT,DELETE",
+	credentials: true, // enable set cookie
+};
+app.use(cors(corsOptions));
 
 // serve the OpenAPI schema
 const public_spec_path = path.join(__dirname, "/api/api.yaml");
