@@ -1,4 +1,4 @@
-import Home from "../Home.jsx";
+import Home from "../pages/Home.jsx";
 import NewListing from "../pages/NewListing.jsx";
 import Profile from "../pages/Profile.jsx";
 import { Navigate } from "react-router-dom";

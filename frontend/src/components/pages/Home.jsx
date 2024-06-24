@@ -1,11 +1,10 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import "./Home.css";
-import axios from "axios";
-import Navbar from "./Navbar";
-import Header from "./Header";
-import Listing from "./Listing";
+import Navbar from "../Navbar";
+import Header from "../Header";
+import Listing from "../Listing";
 import heroImage from "/hero.png";
-import { AuthData } from "../auth/AuthWrapper";
+import { AuthData } from "../../auth/AuthWrapper";
 
 function Home() {
 	const { user, login } = AuthData();
