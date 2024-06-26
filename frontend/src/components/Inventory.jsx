@@ -25,7 +25,9 @@ export default function Inventory(props) {
 					console.error(`error: ${err}`);
 				});
 		}
-		getInventory(props.steamId);
+		if (!inv) {
+			getInventory(props.steamId);
+		}
 	});
 	return (
 		inv && (
