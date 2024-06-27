@@ -20,7 +20,7 @@ function createItemDescription(item) {
 				{item.effect && <p>Effect: {item.effect}</p>}
 				{item.sheen && <p>Sheen: {item.sheen}</p>}
 				{item.killstreaker && <p>Killstreaker: {item.killstreaker}</p>}
-				{item.paint && <p>Painted: {item.paint}</p>}
+				{item.paint && <p>Painted: {item.paint.name}</p>}
 				{item.custom_description && (
 					<p>Custom Desc: "{item.custom_description}"</p>
 				)}
@@ -68,6 +68,7 @@ export default function Item(props) {
 				}}
 				ref={popoverRef}
 			></span>
+			{/* TODO: add paint symbol if item is painted */}
 		</a>
 	);
 }

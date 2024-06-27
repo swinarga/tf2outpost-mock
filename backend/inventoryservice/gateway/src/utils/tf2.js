@@ -58,11 +58,17 @@ export function formatItem(item) {
 
 			case attributeDefindex.effect:
 				itemObjectForSku.effect = itemAttribute.float_value;
+				formattedItem.effect = schemaManager.schema.getEffectById(
+					itemAttribute.float_value
+				);
 				break;
 
 			case attributeDefindex.taunt_effect:
 				if (itemAttribute.is_int) {
 					itemObjectForSku.effect = itemAttribute.value_int;
+					formattedItem.effect = schemaManager.schema.getEffectById(
+						itemAttribute.value_int
+					);
 				}
 				break;
 
@@ -73,7 +79,12 @@ export function formatItem(item) {
 
 			case attributeDefindex.paint[0]:
 			case attributeDefindex.paint[1]:
-				formattedItem.paint = itemAttribute.float_value;
+				formattedItem.paint = {
+					name: schemaManager.schema.getPaintNameByDecimal(
+						itemAttribute.float_value
+					),
+					hex: "#" + itemAttribute.float_value.toString(16),
+				};
 				break;
 			// TODO: handle strange parts
 		}
@@ -110,7 +121,12 @@ export function formatItem(item) {
 	// otherwise, use base image from schema
 	if (itemObjectForSku.effect) {
 		formattedItem.image_url =
-			"https://autobot.tf/images/items/" + sku + ".png";
+			"https://autobot.tf/images/items/" +
+			sku
+				.replace("uncraftable", "")
+				.replace("untradable", "")
+				.replace(/;+$/, "") + // remove trailing semicolons
+			".png";
 	}
 
 	return formattedItem;
