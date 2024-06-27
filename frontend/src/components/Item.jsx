@@ -6,7 +6,26 @@ import { Popover } from "bootstrap";
 function createItemDescription(item) {
 	return (
 		<div>
-			<span>{item.name}</span>
+			<div className="item-title">
+				{item.custom_name ? (
+					<strong>"{item.custom_name}"</strong>
+				) : (
+					<strong>{item.name}</strong>
+				)}
+				<br />
+				Level {item.level}
+			</div>
+			<div className="item-description">
+				{item.custom_name && <p>Real Name: {item.name}</p>}
+				{item.effect && <p>Effect: {item.effect}</p>}
+				{item.sheen && <p>Sheen: {item.sheen}</p>}
+				{item.killstreaker && <p>Killstreaker: {item.killstreaker}</p>}
+				{item.paint && <p>Painted: {item.paint}</p>}
+				{item.custom_description && (
+					<p>Custom Desc: "{item.custom_description}"</p>
+				)}
+				{item.quantity > 1 && <p>Quantity: {item.quantity}</p>}
+			</div>
 		</div>
 	);
 }
@@ -40,13 +59,15 @@ export default function Item(props) {
 	}, [props.item]);
 
 	return (
-		<span
-			className="item"
-			style={{
-				backgroundImage: `url(${props.item.image_url})`,
-				border: `1px solid ${props.item.quality.color}`,
-			}}
-			ref={popoverRef}
-		></span>
+		<a href={"http://backpack.tf/item/" + props.item.original_id}>
+			<span
+				className="item"
+				style={{
+					backgroundImage: `url(${props.item.image_url})`,
+					border: `1px solid ${props.item.quality.color}`,
+				}}
+				ref={popoverRef}
+			></span>
+		</a>
 	);
 }
