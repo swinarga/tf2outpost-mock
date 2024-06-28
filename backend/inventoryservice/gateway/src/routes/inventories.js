@@ -13,6 +13,8 @@ import checkInternalApiKey from "../utils/checkInternalApiKey.js";
 import client from "../client.js";
 import { formatItem } from "../utils/tf2.js";
 
+const FETCH_INVENTORY_TIMEOUT = 5 * 60 * 1000; // 5 minutes
+
 function fetchInventory(id) {
 	return new Promise((resolve, reject) => {
 		client.getInventory({ id: id }, async (err, inventory) => {
@@ -27,16 +29,8 @@ function fetchInventory(id) {
 				const formattedInventory = {
 					items: formattedItems,
 					numBackpackSlots: inventory.num_backpack_slots,
+					lastUpdated: Date.now(),
 				};
-
-				// console.log(formattedItems);
-
-				// TODO: store to DB
-				const createdInventory = await addDocWithKey(
-					"inventories",
-					inventory.steam_id,
-					formattedInventory
-				);
 
 				resolve(formattedInventory);
 			}
@@ -49,15 +43,18 @@ const router = express.Router();
 router.get("/:id", async (req, res) => {
 	const id = req.params.id;
 
-	// TODO: check last queried time or use redis to determine
-	// if we should re-fetch inventory from steam API
 	const inventory = await getDocByKey("inventories", id);
 
-	if (!inventory) {
+	if (
+		!inventory ||
+		inventory.lastUpdated < Date.now() - FETCH_INVENTORY_TIMEOUT
+	) {
 		console.log("inventory not found in DB, fetching from steam API");
 		// inventory not found in DB, fetch from go service
 		try {
 			const formattedInventory = await fetchInventory(id);
+			// store or update inventory
+			await addDocWithKey("inventories", id, formattedInventory);
 			return res.send(formattedInventory);
 		} catch (err) {
 			return res.status(500).send("Failed to fetch inventory");
