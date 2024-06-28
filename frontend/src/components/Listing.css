@@ -25,6 +25,7 @@
 	border-bottom: 1px solid #34353a;
 }
 
+/* TODO: remove later when we are working with listings */
 .item {
 	display: block;
 	float: left;
@@ -35,7 +36,7 @@
 	background-size: 82px;
 	background-position: center;
 	border: 1px solid #202227;
-	margin: 0 4px 4px 0;
+	/* margin: 0 4px 4px 0; */
 	overflow: hidden;
 	border-radius: 4px;
 }

@@ -33,9 +33,7 @@ export default function Inventory(props) {
 		inv && (
 			<ul className="item-container">
 				{inv.items.map((item) => (
-					<li key={item.original_id}>
-						<Item item={item} />
-					</li>
+					<Item key={item.original_id} item={item} />
 				))}
 			</ul>
 		)

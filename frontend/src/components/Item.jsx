@@ -59,16 +59,27 @@ export default function Item(props) {
 	}, [props.item]);
 
 	return (
-		<a href={"http://backpack.tf/item/" + props.item.original_id}>
-			<span
-				className="item"
-				style={{
-					backgroundImage: `url(${props.item.image_url})`,
-					border: `1px solid ${props.item.quality.color}`,
-				}}
-				ref={popoverRef}
-			></span>
-			{/* TODO: add paint symbol if item is painted */}
-		</a>
+		<li
+			className="item"
+			style={{
+				border: `1px solid ${props.item.quality.color}`,
+			}}
+			ref={popoverRef}
+		>
+			<a href={"http://backpack.tf/item/" + props.item.original_id}>
+				<div
+					className="item-icon"
+					style={{
+						backgroundImage: `url(${props.item.image_url})`,
+					}}
+				></div>
+			</a>
+			{props.item.paint && (
+				<div
+					className="paint"
+					style={{ background: `${props.item.paint.hex}` }}
+				></div>
+			)}
+		</li>
 	);
 }

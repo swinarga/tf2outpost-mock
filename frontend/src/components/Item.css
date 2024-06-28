@@ -8,7 +8,26 @@
 	background-size: 82px;
 	background-position: center;
 	border: 1px solid #202227;
-	margin: 0 4px 4px 0;
+	margin: 4px;
 	overflow: hidden;
 	border-radius: 4px;
+}
+
+.paint {
+	position: absolute;
+	top: 8px;
+	right: 8px;
+	z-index: 2;
+	width: 12px;
+	height: 12px;
+	border-radius: 6px;
+}
+
+.item .item-icon {
+	background: #202227;
+	background-size: 82px;
+	background-position: center;
+	height: 100%;
+	width: 100%;
+	position: relative;
 }
