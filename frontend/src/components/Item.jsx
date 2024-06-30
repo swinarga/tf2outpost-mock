@@ -53,10 +53,21 @@ export default function Item(props) {
 			content: renderToString(createItemDescription(props.item)),
 		});
 
+		// TODO: keep popover alive while being hovered
+		// https://stackoverflow.com/questions/15989591/how-can-i-keep-bootstrap-popovers-alive-while-being-hovered/77983489#77983489
+
 		return () => {
 			popover.dispose();
 		};
 	}, [props.item]);
+
+	const handleClick = () => {
+		if (props.isInInventory) {
+			props.onRemove(props.item.original_id);
+		} else {
+			props.onAdd(props.item.original_id, props.item);
+		}
+	};
 
 	return (
 		<li
@@ -65,15 +76,17 @@ export default function Item(props) {
 				border: `1px solid ${props.item.quality.color}`,
 			}}
 			ref={popoverRef}
+			onClick={handleClick}
 		>
-			<a href={"http://backpack.tf/item/" + props.item.original_id}>
-				<div
-					className="item-icon"
-					style={{
-						backgroundImage: `url(${props.item.image_url})`,
-					}}
-				></div>
-			</a>
+			<div
+				className="item-icon"
+				style={{
+					backgroundImage: `url(${props.item.image_url})`,
+				}}
+			></div>
+			{/* <a href={"http://backpack.tf/item/" + props.item.original_id}>
+				
+			</a> */}
 			{props.item.paint && (
 				<div
 					className="paint"
