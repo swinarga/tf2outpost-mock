@@ -6,38 +6,37 @@ import "./NewListing.css";
 
 export default function NewListing() {
 	const { user } = AuthData();
-	const [tradableItemsMap, setTradableItemsMap] = useState(new Map());
-	const [wantedItems, setWantedItems] = useState(new Map());
-	const [forItems, setForItems] = useState(new Map());
+	const [tradableItems, setTradableItems] = useState([]);
+	const [wantedItems, setWantedItems] = useState([]);
+	const [forItems, setForItems] = useState([]);
 
 	const handleRemoveItem = (itemId) => {
-		setTradableItemsMap((prevTradableItemsMap) => {
-			const newTradableItemsMap = new Map(prevTradableItemsMap);
-			const prevItem = prevTradableItemsMap.get(itemId);
-			newTradableItemsMap.delete(itemId);
+		const prevItem = tradableItems.find(
+			(item) => item.original_id === itemId
+		);
 
-			setWantedItems((prevWantedItems) => {
-				const newWantedItems = new Map(prevWantedItems);
-				newWantedItems.set(itemId, prevItem);
-				return newWantedItems;
-			});
-
-			return newTradableItemsMap;
+		setTradableItems((prevTradableItems) => {
+			const newTradableItems = prevTradableItems.filter(
+				(item) => item.original_id !== itemId
+			);
+			return newTradableItems;
+		});
+		setWantedItems((prevWantedItems) => {
+			const newWantedItems = prevWantedItems.concat(prevItem);
+			return newWantedItems;
 		});
 	};
 
 	const handleAddItem = (itemId, item) => {
-		setTradableItemsMap((prevTradableItemsMap) => {
-			const newTradableItemsMap = new Map(prevTradableItemsMap);
-			newTradableItemsMap.set(itemId, item);
-
-			setWantedItems((prevWantedItems) => {
-				const newWantedItems = new Map(prevWantedItems);
-				newWantedItems.delete(itemId);
-				return newWantedItems;
-			});
-
-			return newTradableItemsMap;
+		setTradableItems((prevTradableItems) => {
+			const newTradableItems = [item].concat(prevTradableItems);
+			return newTradableItems;
+		});
+		setWantedItems((prevWantedItems) => {
+			const newWantedItems = prevWantedItems.filter(
+				(item) => item.original_id !== itemId
+			);
+			return newWantedItems;
 		});
 	};
 
@@ -48,7 +47,7 @@ export default function NewListing() {
 				<div className="container-fluid trade-container">
 					<h1>Want:</h1>
 					<ul className="container-fluid d-flex flex-row flex-wrap">
-						{Array.from(wantedItems.values()).map((item) => (
+						{wantedItems.map((item) => (
 							<Item
 								key={item.original_id}
 								item={item}
@@ -69,8 +68,8 @@ export default function NewListing() {
 
 			<Inventory
 				steamId={user.steamId}
-				tradableItemsMap={tradableItemsMap}
-				setTradableItemsMap={setTradableItemsMap}
+				tradableItems={tradableItems}
+				setTradableItems={setTradableItems}
 				setWantedItems={setWantedItems}
 				setForItems={setForItems}
 				handleRemoveItem={handleRemoveItem}
