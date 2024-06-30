@@ -49,12 +49,17 @@ router.get("/:id", async (req, res) => {
 		!inventory ||
 		inventory.lastUpdated < Date.now() - FETCH_INVENTORY_TIMEOUT
 	) {
-		console.log("inventory not found in DB, fetching from steam API");
+		console.log(
+			"inventory not found in DB or inventory outdated, fetching from steam API"
+		);
 		// inventory not found in DB, fetch from go service
 		try {
 			const formattedInventory = await fetchInventory(id);
 			// store or update inventory
-			await addDocWithKey("inventories", id, formattedInventory);
+			if (process.env.NODE_ENV !== "debug") {
+				console.log("storing inventory in DB...");
+				await addDocWithKey("inventories", id, formattedInventory);
+			}
 			return res.send(formattedInventory);
 		} catch (err) {
 			return res.status(500).send("Failed to fetch inventory");
