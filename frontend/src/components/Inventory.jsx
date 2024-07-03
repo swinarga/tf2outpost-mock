@@ -38,24 +38,34 @@ export default function Inventory(props) {
 		inv && (
 			<ul className="container-fluid justify-content-center d-flex flex-wrap">
 				{props.tradableItems
-					? props.tradableItems.map((item) => (
-							<Item
-								key={item.original_id}
-								item={item}
-								onRemove={props.handleRemoveItem}
-								onAdd={props.handleAddItem}
-								isInInventory={true}
-							/>
-					  ))
-					: inv.items.map((item) => {
-							<Item
-								key={item.original_id}
-								item={item}
-								onRemove={props.handleRemoveItem}
-								onAdd={props.handleAddItem}
-								isInInventory={true}
-							/>;
-					  })}
+					? props.tradableItems
+							.filter((item) =>
+								item.name
+									.toLowerCase()
+									.includes(props.searchValue.toLowerCase())
+							)
+							.map((item) => (
+								<Item
+									key={item.original_id}
+									item={item}
+									onRemove={props.handleRemoveItem}
+									onAdd={props.handleAddItem}
+									isInInventory={true}
+								/>
+							))
+					: inv.items
+							.filter((item) =>
+								item.name.includes(props.searchValue)
+							)
+							.map((item) => {
+								<Item
+									key={item.original_id}
+									item={item}
+									onRemove={props.handleRemoveItem}
+									onAdd={props.handleAddItem}
+									isInInventory={true}
+								/>;
+							})}
 			</ul>
 		)
 	);

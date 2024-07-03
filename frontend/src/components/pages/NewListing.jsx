@@ -6,6 +6,7 @@ import "./NewListing.css";
 
 export default function NewListing() {
 	const { user } = AuthData();
+	const [searchValue, setSearchValue] = useState("");
 	const [tradableItems, setTradableItems] = useState([]);
 	const [wantedItems, setWantedItems] = useState([]);
 	const [forItems, setForItems] = useState([]);
@@ -65,9 +66,22 @@ export default function NewListing() {
 					</ul>
 				</div>
 			</div>
+			<form class="form-inline">
+				<input
+					className="form-control mr-sm-2"
+					value={searchValue}
+					type="search"
+					placeholder="Search"
+					aria-label="Search"
+					onChange={(e) => {
+						setSearchValue(e.target.value);
+					}}
+				/>
+			</form>
 
 			<Inventory
 				steamId={user.steamId}
+				searchValue={searchValue}
 				tradableItems={tradableItems}
 				setTradableItems={setTradableItems}
 				setWantedItems={setWantedItems}
