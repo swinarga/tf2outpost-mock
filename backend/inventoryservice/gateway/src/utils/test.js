@@ -1,4 +1,6 @@
 import { parseEconItem, stringify } from "tf2-item-format/static";
+import getBaseItemImage from "../lib/autobot.tf/getBaseItemImage";
+import { schemaManager } from "./tf2";
 
 // const econ = {
 // 	appid: 440,
@@ -235,3 +237,21 @@ const econ = {
 const item = parseEconItem(econ);
 console.log(item);
 console.log(stringify(item));
+
+// WARPAINTS
+const kbee = {
+	defindex: 15151,
+	quality: 15,
+	paintkit: 85,
+	wear: 1,
+};
+console.log(schemaManager.schema.getName(kbee));
+console.log(getBaseItemImage(kbee, kbee, schemaManager.schema.getName(kbee)));
+
+// hats that are not craftable
+console.log(
+	schemaManager.schema.raw.schema.items.filter(
+		(item) =>
+			item.item_slot === "misc" && item.craft_material_type !== "hat"
+	)
+);
