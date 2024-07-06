@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import * as OpenApiValidator from "express-openapi-validator";
 import { getDocByKey } from "./src/firebase/firebase.js";
 import inventoryRoutes from "./src/routes/inventories.js";
+import schemaRoutes from "./src/routes/schema.js";
 import path from "path";
 import { fileURLToPath } from "url";
 import swaggerUI from "swagger-ui-express";
@@ -43,6 +44,7 @@ app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(public_spec));
 // );
 
 app.use("/inventories", inventoryRoutes);
+app.use("/schema", schemaRoutes);
 
 app.listen(3002);
 console.log("Express server listening on port: " + 3002);

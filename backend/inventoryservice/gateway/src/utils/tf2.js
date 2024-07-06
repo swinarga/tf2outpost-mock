@@ -13,7 +13,7 @@ import getBaseItemImage from "../lib/autobot.tf/getBaseItemImage.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const SCHEMA_PATH = path.join(__dirname, "..", "..", "schema_cached.json");
-const schemaManager = new Schema({ apiKey: undefined });
+export const schemaManager = new Schema({ apiKey: undefined });
 
 if (fs.existsSync(SCHEMA_PATH)) {
 	// a cached schema exists
