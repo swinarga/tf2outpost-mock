@@ -1,5 +1,6 @@
 import express from "express";
 import { schemaManager } from "../utils/tf2.js";
+import { qualityColors } from "../utils/data.js";
 
 const router = express.Router();
 
@@ -19,8 +20,16 @@ router.get("/search", async (req, res) => {
 						defindex: item.defindex,
 						description: item.item_description,
 						classes: item.used_by_classes,
-						image: item.image_url_large,
+						image_url: item.image_url_large,
 						type: item.item_slot,
+						quality: {
+							value: item.item_quality,
+							color: qualityColors[
+								schemaManager.schema.getQualityById(
+									item.item_quality
+								)
+							],
+						},
 					};
 				}),
 		});
