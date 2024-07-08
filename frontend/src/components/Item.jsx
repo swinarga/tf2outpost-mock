@@ -13,7 +13,7 @@ function createItemDescription(item) {
 					<strong>{item.name}</strong>
 				)}
 				<br />
-				Level {item.level}
+				{item.level && <p>Level {item.level}</p>}
 			</div>
 			<div className="item-description">
 				{item.custom_name && <p>Real Name: {item.name}</p>}
