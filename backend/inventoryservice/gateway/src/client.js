@@ -17,6 +17,6 @@ const inventoryProto =
 	grpc.loadPackageDefinition(packageDefinition).InventoryService;
 
 export default new inventoryProto(
-	"localhost:3003",
+	process.env.INVENTORY_SERVICE_ADDRESS || "0.0.0.0:3003",
 	grpc.credentials.createInsecure()
 );
