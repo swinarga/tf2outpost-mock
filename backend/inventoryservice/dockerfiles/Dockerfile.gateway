@@ -10,8 +10,6 @@ RUN npm install
 WORKDIR /app
 COPY inventory.proto .
 
-RUN --mount=type=secret,id=serviceAccountKey.json,dst=/etc/secrets/serviceAccountKey.json cat /etc/secrets/serviceAccountKey.json
-
 EXPOSE 3002
 
 WORKDIR /app/gateway

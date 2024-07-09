@@ -1,11 +1,20 @@
 // Import the functions you need from the SDKs you need
 import admin from "firebase-admin";
 import { getFirestore } from "firebase-admin/firestore";
-import serviceAccount from "../../../serviceAccountKey.json" assert { type: "json" };
+import fs from "fs";
+import dotenv from "dotenv";
+
+dotenv.config();
+
+const serviceAccountKeyPath =
+	process.env.SERVICE_ACCOUNT_KEY_PATH || "../../../serviceAccountKey.json";
+const serviceAccountKey = JSON.parse(
+	fs.readFileSync(serviceAccountKeyPath, "utf8")
+);
 
 // Initialize Firebase
 const app = admin.initializeApp({
-	credential: admin.credential.cert(serviceAccount),
+	credential: admin.credential.cert(serviceAccountKey),
 });
 const firestore = getFirestore(app);
 
