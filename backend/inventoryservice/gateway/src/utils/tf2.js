@@ -10,21 +10,22 @@ import {
 	killstreakers,
 } from "./data.js";
 import getBaseItemImage from "../lib/autobot.tf/getBaseItemImage.js";
+import downloadSchema from "./downloadSchema.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const SCHEMA_PATH = path.join(__dirname, "..", "..", "schema_cached.json");
 export const schemaManager = new Schema({ apiKey: undefined });
 
-if (fs.existsSync(SCHEMA_PATH)) {
-	// a cached schema exists
-	console.log("cached schema exists");
-
-	// read and parse the cached schema
-	const cachedData = JSON.parse(fs.readFileSync(SCHEMA_PATH));
-
-	// set the schema data
-	schemaManager.setSchema(cachedData);
+if (!fs.existsSync(SCHEMA_PATH)) {
+	console.log("cached schema does not exist");
+	await downloadSchema();
 }
+
+// read and parse the cached schema
+const cachedData = JSON.parse(fs.readFileSync(SCHEMA_PATH));
+
+// set the schema data
+schemaManager.setSchema(cachedData);
 
 // item received from API
 export function formatItem(item) {
