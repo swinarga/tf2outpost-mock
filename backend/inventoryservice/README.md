@@ -182,3 +182,13 @@ http://steamcommunity.com/inventory/<PROFILEID>/440/2?l=english&count=5000&start
 ```
 
 This will pull the next 5000 items starting with assetid 468336866.
+
+## Docker
+
+```bash
+docker compose up
+```
+
+https://stackoverflow.com/questions/66314534/env-variables-not-coming-through-godotenv-docker
+
+.env file is included in image (DO NOT SHARE IMAGE!)

@@ -1,0 +1,16 @@
+FROM node:18.19.0-slim
+
+WORKDIR /app
+
+COPY gateway/ gateway/
+
+WORKDIR /app/gateway
+RUN npm install
+
+WORKDIR /app
+COPY inventory.proto .
+
+EXPOSE 3002
+
+WORKDIR /app/gateway
+CMD ["npm", "start"]

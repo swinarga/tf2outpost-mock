@@ -1,0 +1,16 @@
+version: "3.9"
+
+services:
+    gateway:
+        build:
+            context: .
+            dockerfile: ./dockerfiles/Dockerfile.gateway
+        ports:
+            - 3002:3002
+
+    main:
+        build:
+            context: .
+            dockerfile: ./dockerfiles/Dockerfile.main
+        ports:
+            - 3003:3003
