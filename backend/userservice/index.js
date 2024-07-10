@@ -75,18 +75,19 @@ app.use(passport.session());
 app.use(bodyParser.json());
 
 // serve the OpenAPI schema
-const public_spec_path = path.join(__dirname, "/api/api.yaml");
-app.use("/spec", express.static(public_spec_path));
+// const public_spec_path = path.join(__dirname, "/api/api.yaml");
+// console.log(public_spec_path);
+// app.use("/spec", express.static(public_spec_path));
 
-const public_spec = jsYaml.load(fs.readFileSync(public_spec_path, "utf8"));
-app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(public_spec));
+// const public_spec = jsYaml.load(fs.readFileSync(public_spec_path, "utf8"));
+// app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(public_spec));
 
-app.use(
-	OpenApiValidator.middleware({
-		apiSpec: public_spec,
-		validateResponses: true,
-	})
-);
+// app.use(
+// 	OpenApiValidator.middleware({
+// 		apiSpec: public_spec,
+// 		validateResponses: true,
+// 	})
+// );
 
 app.use("/users", userRoutes);
 
