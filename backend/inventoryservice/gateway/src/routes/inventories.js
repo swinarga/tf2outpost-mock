@@ -11,7 +11,8 @@ import {
 } from "../middleware/middleware.js";
 import checkInternalApiKey from "../utils/checkInternalApiKey.js";
 import client from "../client.js";
-import { formatItem } from "../utils/tf2.js";
+import { formatItemGRPC } from "../utils/tf2.js";
+import getSteamInventory from "../httpClient.js";
 
 const FETCH_INVENTORY_TIMEOUT = 5 * 60 * 1000; // 5 minutes
 
@@ -24,7 +25,7 @@ function fetchInventory(id) {
 				reject();
 			} else {
 				const formattedItems = inventory.items.map((item) =>
-					formatItem(item)
+					formatItemGRPC(item)
 				);
 				const formattedInventory = {
 					items: formattedItems,
@@ -54,7 +55,9 @@ router.get("/:id", async (req, res) => {
 		);
 		// inventory not found in DB, fetch from go service
 		try {
-			const formattedInventory = await fetchInventory(id);
+			// const formattedInventory = await fetchInventory(id);
+			const formattedInventory = await getSteamInventory(id);
+
 			// store or update inventory
 			if (process.env.NODE_ENV !== "debug") {
 				console.log("storing inventory in DB...");
