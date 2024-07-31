@@ -4,7 +4,6 @@ import { AuthData } from "../../auth/AuthWrapper.jsx";
 
 export const RenderRoutes = () => {
 	const { user } = AuthData();
-	console.log(user);
 
 	return (
 		<Routes>
