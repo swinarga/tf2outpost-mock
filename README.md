@@ -1,6 +1,6 @@
 # TF2Outpost Mock
 
-Mock website inspired by [TF2 Outpost](https://wiki.archiveteam.org/index.php/TF2_Outpost), a platform where Team Fortress 2 players could list and trade their in-game items.
+Mock website of [TF2 Outpost](https://wiki.archiveteam.org/index.php/TF2_Outpost), a platform where Team Fortress 2 players could list and trade their in-game items.
 
 Frontend: React + Bootstrap
 
